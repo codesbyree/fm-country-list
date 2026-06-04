@@ -1,7 +1,7 @@
 @import "tailwindcss";
-import "@fontsource-variable/nunito-sans"
+@import "@fontsource-variable/nunito-sans";
 
-@custom-variant dark (&:is(.dark*));
+@custom-variant dark (&: is(.dark *));
 
 :root {
     --font-sans: "Nunito Sans Variable", sans-serif;
@@ -18,7 +18,6 @@ import "@fontsource-variable/nunito-sans"
     --input: hsl(0, 100%, 100%);
     --card: hsl(209, 23%, 22%);
 }
-
 
 @layer {
     html {
