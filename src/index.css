@@ -1,0 +1,27 @@
+@import "tailwindcss";
+import "@fontsource-variable/nunito-sans"
+
+@custom-variant dark (&:is(.dark*));
+
+:root {
+    --font-sans: "Nunito Sans Variable", sans-serif;
+    --font-heading: var(--font-sans);
+    --background: hsl(0, 0%, 99%);
+    --foreground: hsl(200, 15%, 8%);
+    --input: hsl(0, 0%, 50%);
+    --card: hsl(0, 100%, 100%);
+}
+
+.dark {
+    --background: hsl(207, 26%, 17%);
+    --foreground: hsl(0, 100%, 100%);
+    --input: hsl(0, 100%, 100%);
+    --card: hsl(209, 23%, 22%);
+}
+
+
+@layer {
+    html {
+        @apply font-sans bg-background;
+    }
+}
