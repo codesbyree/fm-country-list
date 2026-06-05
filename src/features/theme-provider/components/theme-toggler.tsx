@@ -18,12 +18,12 @@ export default function ThemeToggler() {
   };
 
   const content = {
-    dark: (
+    light: (
       <>
         <SunIcon className="w-4 h-4" /> Light Mode
       </>
     ),
-    light: (
+    dark: (
       <>
         <MoonIcon className="w-4 h-4" /> Dark Mode
       </>

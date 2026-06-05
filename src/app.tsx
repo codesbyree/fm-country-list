@@ -1,12 +1,18 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import Homepage from "./app/homepage";
-import Header from "./components/shared/header";
-import ThemeProvider from "./features/theme-provider/components/theme-provider";
+import CountryDetailPage from "./app/country-detail-page";
+import MainLayout from "./components/layout/main-layout";
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <Header />
-      <Homepage />
-    </ThemeProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route index element={<Homepage />} />
+          <Route path="/id" element={<CountryDetailPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
