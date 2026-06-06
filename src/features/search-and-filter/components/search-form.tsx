@@ -12,15 +12,22 @@ export default function SearchForm() {
     if (query) params.set("country", query.trim());
     else params.delete("country");
     setSearchParams(params, { replace: true });
-  }, 600);
+  }, 300);
 
   return (
-    <form onSubmit={(e) => e.preventDefault()} className="flex items-center flex-row-reverse shadow-md shadow-slate-500/10">
+    <form onSubmit={(e) => e.preventDefault()} className="flex items-center flex-row-reverse shadow-md shadow-slate-500/10 lg:min-w-100 rounded-md overflow-hidden">
       <div className="w-full">
         <label htmlFor="country-name" className="sr-only">
           Country name
         </label>
-        <Input placeholder="Search for a country..." className="" defaultValue={searchParams.get("country") || ""} onChange={(e) => debouncedSearch(e.target.value)} />
+        <Input
+          placeholder="Search for a country..."
+          className=""
+          id="country-name"
+          defaultValue={searchParams.get("country") || ""}
+          autoComplete="off"
+          onChange={(e) => debouncedSearch(e.target.value)}
+        />
       </div>
 
       <span className="h-15 bg-card grid place-items-center pl-7 pr-3">

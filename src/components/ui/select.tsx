@@ -28,13 +28,14 @@ function useSelectContext() {
 
 interface SelectProps extends ComponentPropsWithoutRef<"div"> {
   onValueChange?: (val: string) => void;
+  defaultValue?: string;
 }
 
 export function Select(props: SelectProps) {
-  const { className, children, onValueChange, ...rest } = props;
+  const { className, children, onValueChange, defaultValue = "", ...rest } = props;
   const [open, setOpen] = useState(false);
   const [label, setLabel] = useState("");
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState(defaultValue);
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const ref = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -124,18 +125,12 @@ export function SelectContent({ children }: { children: ReactNode }) {
 
   return (
     <div>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ y: 4, opacity: 0, filter: "blur(8px)" }}
-            animate={{ y: 8, opacity: 1, filter: "blur(0px)" }}
-            exit={{ y: 4, opacity: 0, filter: "blur(8px)" }}
-            className="absolute w-full"
-          >
-            {children}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        animate={{ y: open ? 8 : 4, opacity: open ? 1 : 0, filter: open ? "blur(0px)" : "blur(8px)" }}
+        className={cn("absolute w-full z-50 pointer-events-auto", !open && "pointer-events-none")}
+      >
+        {children}
+      </motion.div>
     </div>
   );
 }
@@ -187,8 +182,10 @@ export function SelectItem({ children, value }: { children: ReactNode; value: st
   const { setLabel, setOpen, onValueChange, selected, setSelected, focusedIndex, triggerRef } = useSelectContext();
   const itemRef = useRef<HTMLButtonElement>(null);
 
-  // Auto-focus this item when focusedIndex matches its position
-  // We derive index from the DOM to keep it decoupled 👇
+  useEffect(() => {
+    if (selected === value) setLabel(children as unknown as string);
+  }, []);
+
   useEffect(() => {
     if (!itemRef.current) return;
     const list = itemRef.current.closest("[role='listbox']");

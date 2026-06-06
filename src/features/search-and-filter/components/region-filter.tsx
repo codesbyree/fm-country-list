@@ -13,7 +13,7 @@ export default function RegionFilter() {
 
   return (
     <div className="w-full max-w-55">
-      <Select onValueChange={handleValueChange}>
+      <Select onValueChange={handleValueChange} defaultValue={searchParams.get("region") ?? ""}>
         <SelectTrigger>
           <SelectValue placeholder="Filter by Region" />
         </SelectTrigger>
@@ -21,7 +21,7 @@ export default function RegionFilter() {
         <SelectContent>
           <SelectGroup>
             <SelectItem value="africa">Africa</SelectItem>
-            <SelectItem value="america">America</SelectItem>
+            <SelectItem value="americas">Americas</SelectItem>
             <SelectItem value="asia">Asia</SelectItem>
             <SelectItem value="europe">Europe</SelectItem>
             <SelectItem value="oceania">Oceania</SelectItem>

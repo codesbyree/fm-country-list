@@ -10,7 +10,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Homepage />} />
-          <Route path="/id" element={<CountryDetailPage />} />
+          <Route path="/:cca2" element={<CountryDetailPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
