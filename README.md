@@ -34,7 +34,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Open in Frontendmentor](https://www.frontendmentor.io/solutions/countreelist---country-list-viewer-built-with-react-vite-tailwind-D5o2vcSt1b)
+- Solution URL: [Open in Frontendmentor](https://www.frontendmentor.io/solutions/countreelist---country-list-viewer-built-with-react-vite-tailwind-FonnarUdrR)
 - Live Site URL: [See the site live](https://countreelist.netlify.app/)
 
 ## My process
