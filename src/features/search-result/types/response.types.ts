@@ -17,5 +17,5 @@ export interface BaseResponse {
   capital: string[];
   region: string;
   population: number;
-  cca2: string;
+  cca3: string;
 }

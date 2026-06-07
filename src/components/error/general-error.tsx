@@ -10,7 +10,7 @@ export default function GeneralError(props: Props) {
   const { className, errorMessage } = props;
 
   return (
-    <div className={cn("flex flex-col items-center text-red-300 bg-red-600/20 border border-red-600 p-6 rounded-lg max-w-xs mx-auto w-full", className)}>
+    <div className={cn("flex flex-col items-center text-red-600 dark:text-red-300 bg-red-600/20 border border-red-600 p-6 rounded-lg max-w-xs mx-auto w-full", className)}>
       <TriangleAlertIcon />
       <h4 className="mb-2 mt-6 font-medium">Something wrong happened!</h4>
       <p>{errorMessage}</p>

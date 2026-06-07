@@ -19,15 +19,8 @@ export const fetchCountryList = async (countryName?: string, regionName?: string
   }
 };
 
-export const fetchByCountryCode = async (cca: string) => {
-  const response = await fetch(`/api/alpha/${cca}`, { method: "GET" });
-  const data = await response.json();
-  if (!Array.isArray(data)) throw new Error(data.message);
-  return data;
-};
-
 const fetchAllCountry = async () => {
-  const response = await fetch("/api/all?fields=name,flags,population,region,capital,cca2", { method: "GET" });
+  const response = await fetch("/api/all?fields=name,flags,population,region,capital,cca3", { method: "GET" });
   const data = await response.json();
   if (!Array.isArray(data)) throw new Error(data.message);
   return data;

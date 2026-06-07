@@ -17,6 +17,8 @@ export default function CountryCardList() {
 
   const { data, isLoading, isFetching, isPending, isError } = useQuery({ queryKey: [region, country], queryFn: async () => fetchCountryList(country, region), staleTime: toMS(0, 5, 0) });
 
+  const isAcutallyLoading = isLoading || isFetching || isPending;
+
   if (isError)
     return (
       <section className="p-10">
@@ -24,14 +26,12 @@ export default function CountryCardList() {
       </section>
     );
 
-  if (!data?.length)
+  if (!data?.length && !isAcutallyLoading)
     return (
       <section className="p-10">
         <GeneralErrorEmpty />
       </section>
     );
-
-  const isAcutallyLoading = isLoading || isFetching || isPending;
 
   const renderer = () => {
     if (isAcutallyLoading) return [1, 2, 3, 4, 5, 6, 7, 8].map((x) => <CountryCardSekeleton key={x} />);
