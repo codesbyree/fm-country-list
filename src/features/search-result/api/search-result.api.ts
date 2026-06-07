@@ -1,22 +1,17 @@
 export const fetchCountryList = async (countryName?: string, regionName?: string) => {
-  try {
-    let countries;
-    if (regionName) countries = await fetchByRegion(regionName);
-    else countries = await fetchAllCountry();
+  let countries;
+  if (regionName) countries = await fetchByRegion(regionName);
+  else countries = await fetchAllCountry();
 
-    const shouldFetchAll = !countryName;
-    if (shouldFetchAll) return countries;
+  const shouldFetchAll = !countryName;
+  if (shouldFetchAll) return countries;
 
-    return countries.filter((country) => {
-      const cName = country.name.official.toLowerCase();
-      const searchName = countryName.trim().toLowerCase();
-      const cNameMatch = cName.includes(searchName);
-      return cNameMatch;
-    });
-  } catch (err: unknown) {
-    const error = err as Error;
-    console.log(error.message);
-  }
+  return countries.filter((country) => {
+    const cName = country.name.official.toLowerCase();
+    const searchName = countryName.trim().toLowerCase();
+    const cNameMatch = cName.includes(searchName);
+    return cNameMatch;
+  });
 };
 
 const fetchAllCountry = async () => {

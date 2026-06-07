@@ -30,5 +30,9 @@ export default function ThemeToggler() {
     ),
   };
 
-  return <Button onClick={toggleTheme}>{content[theme]}</Button>;
+  return (
+    <Button className="hover:opacity-70 transition-opacity" onClick={toggleTheme}>
+      {content[theme]}
+    </Button>
+  );
 }

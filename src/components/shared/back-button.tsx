@@ -6,7 +6,7 @@ export default function BackButton() {
   const navigate = useNavigate();
 
   return (
-    <Button onClick={() => navigate(-1)} className="bg-card shadow-md rounded-md p-2 px-4 w-max">
+    <Button onClick={() => navigate(-1)} className="bg-card shadow-md rounded-md p-2 px-4 w-max hover:bg-slate-100 dark:hover:bg-slate-700">
       <ArrowLeftIcon className="w-4 h-4" />
       Back
     </Button>

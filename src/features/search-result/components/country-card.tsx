@@ -14,6 +14,7 @@ const itemVariants = {
   hidden: { opacity: 0, y: 5 },
   show: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: -5 },
+  hover: { y: -4 },
 };
 
 export default function CountryCard(props: Props) {
@@ -21,9 +22,9 @@ export default function CountryCard(props: Props) {
 
   return (
     <Link to={`/${cca3}`}>
-      <motion.article layout variants={itemVariants} initial="hidden" animate="show" exit="exit" className="w-70 lg:w-full rounded-lg shadow-lg overflow-hidden bg-card">
-        <AspectRatio ratio={16 / 9}>
-          <img src={flags.svg} alt={flags.alt} className="w-full h-full object-cover bg-slate-200 dark:bg-slate-600" loading="lazy" />
+      <motion.article layout variants={itemVariants} whileHover="hover" initial="hidden" animate="show" exit="exit" className="w-70 lg:w-full rounded-lg shadow-lg overflow-hidden bg-card group">
+        <AspectRatio ratio={16 / 9} className="overflow-hidden">
+          <img src={flags.svg} alt={flags.alt} className="group-hover:scale-110 transition-transform w-full h-full object-cover bg-slate-200 dark:bg-slate-600" loading="lazy" />
         </AspectRatio>
 
         <div className="p-6 text-foreground border-t border-slate-200 dark:border-slate-900">

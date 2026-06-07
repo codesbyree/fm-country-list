@@ -6,15 +6,19 @@ const pageVariants = {
   exit: { opacity: 0, y: -10 },
 };
 
-const pageTransition = {
-  type: "tween",
-  ease: "anticipate",
-  duration: 0.3,
-};
-
 const PageTransition = ({ children }: { children: React.ReactNode }) => {
   return (
-    <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit" transition={pageTransition}>
+    <motion.div
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={{
+        type: "tween",
+        ease: "anticipate",
+        duration: 0.3,
+      }}
+    >
       {children}
     </motion.div>
   );

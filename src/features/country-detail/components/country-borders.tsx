@@ -27,7 +27,7 @@ export default function CountryBorders(props: Props) {
             to={`/${country.cca2}`}
             replace
             key={country.cca2}
-            className="text-sm p-2 px-4 rounded-sm shadow-md bg-card text-center whitespace-nowrap overflow-hidden text-ellipsis text-foreground"
+            className="text-sm p-2 px-4 rounded-sm shadow-md bg-card text-center whitespace-nowrap overflow-hidden text-ellipsis text-foreground hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
           >
             {country.name.common}
           </Link>

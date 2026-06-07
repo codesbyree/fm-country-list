@@ -1,5 +1,5 @@
 import { useState, createContext, type ReactNode, useContext, type Dispatch, type SetStateAction, type ComponentPropsWithoutRef, useRef, useEffect, useId } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { cn } from "../../utils/cn.utils";
 import { CheckIcon, ChevronDownIcon } from "lucide-react";
 
@@ -92,7 +92,11 @@ export function SelectTrigger(props: ComponentPropsWithoutRef<"button">) {
       aria-haspopup="listbox"
       aria-expanded={open}
       aria-controls={listboxId}
-      className={cn("p-4 bg-card shadow-md shadow-slate-500/10 h-15 text-foreground text-sm w-full", "flex items-center justify-between px-7 rounded-md cursor-pointer", className)}
+      className={cn(
+        "p-4 bg-card shadow-md shadow-slate-500/10 h-15 text-foreground text-sm w-full",
+        "flex items-center justify-between px-7 rounded-md cursor-pointer hover:bg-slate-100 hover:dark:bg-slate-700 focus:dark:bg-slate-700 focus:bg-slate-100",
+        className,
+      )}
       onClick={() => {
         setOpen(!open);
         setFocusedIndex(-1);
@@ -126,6 +130,7 @@ export function SelectContent({ children }: { children: ReactNode }) {
   return (
     <div>
       <motion.div
+        initial={{ y: 4, opacity: 0, filter: "blur(8px)" }}
         animate={{ y: open ? 8 : 4, opacity: open ? 1 : 0, filter: open ? "blur(0px)" : "blur(8px)" }}
         className={cn("absolute w-full z-50 pointer-events-auto", !open && "pointer-events-none")}
       >
@@ -217,7 +222,7 @@ export function SelectItem({ children, value }: { children: ReactNode; value: st
         role="option"
         aria-selected={value === selected}
         onClick={handleChange}
-        className="text-foreground text-sm p-2 px-7 cursor-pointer w-full text-left flex items-center justify-between focus:outline-none"
+        className="text-foreground text-sm p-2 px-7 cursor-pointer w-full text-left flex items-center justify-between focus:outline-none hover:bg-slate-100 dark:hover:bg-slate-800"
       >
         {children}
         <CheckIcon className={cn("w-4 h-4 opacity-0", value === selected && "opacity-100")} />

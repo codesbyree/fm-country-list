@@ -3,7 +3,7 @@ import Skeleton from "../../../components/ui/skeleton";
 
 export default function CountryCardSekeleton() {
   return (
-    <div className="w-70 rounded-lg shadow-lg overflow-hidden bg-card">
+    <div className="w-70 lg:w-full rounded-lg shadow-lg overflow-hidden bg-card">
       <AspectRatio ratio={16 / 9}>
         <Skeleton className="w-full h-full" />
       </AspectRatio>
