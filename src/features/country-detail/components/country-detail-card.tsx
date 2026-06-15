@@ -22,7 +22,7 @@ export default function CountryDetailCard(props: Props) {
   return (
     <article className={cn("flex flex-col gap-8 lg:grid lg:grid-cols-2 lg:gap-20", className)} {...rest}>
       <AspectRatio ratio={16 / 9} className="border border-slate-200 dark:border-background">
-        <img src={flag.url_svg} alt={flag.description} className="w-full h-full lg:h-auto object-cover" />
+        <img src={flag.url_svg} alt={flag.description} className="w-full h-full object-contain object-center" />
       </AspectRatio>
 
       <div className="flex flex-col gap-8 lg:gap-12">
