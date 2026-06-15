@@ -1,1 +1,1 @@
-/api/* https://restcountries.com/v3.1/:splat 200
+/api/* https://api.restcountries.com/countries/v5:splat 200

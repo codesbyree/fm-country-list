@@ -1,23 +1,37 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
-
 import { toMS } from "../../../utils/time.utils";
-import { fetchCountryList } from "../api/search-result.api";
+import { fetchAllCountry } from "../api/search-result.api";
 import { parseSearchParams } from "../utils/search-result.utils";
 import type { BaseResponse } from "../types/response.types";
-
 import CountryCard from "./country-card";
 import GeneralError from "../../../components/error/general-error";
 import CountryCardSekeleton from "./country-card-skeleton";
 import GeneralErrorEmpty from "../../../components/error/general-error-empty";
+import Pagination from "./pagination";
 
 export default function CountryCardList() {
   const [searchParams] = useSearchParams();
   const { region, country } = parseSearchParams(searchParams);
+  const offset = searchParams.get("offset") ?? "1";
+  const limit = searchParams.get("limit") ?? "10";
 
-  const { data, isLoading, isFetching, isPending, isError } = useQuery({ queryKey: [region, country], queryFn: async () => fetchCountryList(country, region), staleTime: toMS(0, 5, 0) });
+  const { data, isLoading, isFetching, isPending, isError } = useQuery({
+    queryKey: [region, country, offset, limit],
+    queryFn: async () => fetchAllCountry(country, region, offset, limit),
+    staleTime: toMS(0, 5, 0),
+  });
 
   const isAcutallyLoading = isLoading || isFetching || isPending;
+
+  if (isAcutallyLoading)
+    return (
+      <ListWrapper>
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((x) => (
+          <CountryCardSekeleton key={x} />
+        ))}
+      </ListWrapper>
+    );
 
   if (isError)
     return (
@@ -26,19 +40,21 @@ export default function CountryCardList() {
       </section>
     );
 
-  if (!data?.length && !isAcutallyLoading)
+  if (!data?.objects.length && !isAcutallyLoading)
     return (
       <section className="p-10">
         <GeneralErrorEmpty />
       </section>
     );
 
-  const renderer = () => {
-    if (isAcutallyLoading) return [1, 2, 3, 4, 5, 6, 7, 8].map((x) => <CountryCardSekeleton key={x} />);
-    return (data as BaseResponse[]).map((d) => <CountryCard key={d.name.official} {...d} />);
-  };
+  const renderer = () => (data.objects as BaseResponse[]).map((d) => <CountryCard key={d.names.common} {...d} />);
 
-  return <ListWrapper>{renderer()}</ListWrapper>;
+  return (
+    <>
+      <ListWrapper>{renderer()}</ListWrapper>
+      <Pagination total={data.meta.total} more={data.meta.more} />
+    </>
+  );
 }
 
 function ListWrapper({ children }: { children: React.ReactNode }) {

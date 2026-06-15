@@ -1,21 +1,30 @@
 export interface BaseResponse {
-  flags: {
-    png: string;
-    svg: string;
-    alt: string;
-  };
-  name: {
+  names: {
     common: string;
-    official: string;
-    nativeName: {
-      eng: {
-        official: string;
-        common: string;
-      };
-    };
   };
-  capital: string[];
+  codes: {
+    ccn3: string;
+  };
+  capitals: {
+    attributes: {
+      administrative: boolean;
+      constitutional: boolean;
+      executive: boolean;
+      judicial: boolean;
+      legislative: boolean;
+      primary: boolean;
+    };
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
+    name: string;
+  }[];
+  flag: {
+    description: string;
+    url_svg: string;
+    url_png: string;
+  };
   region: string;
   population: number;
-  cca3: string;
 }

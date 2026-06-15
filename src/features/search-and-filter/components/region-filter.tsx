@@ -7,7 +7,12 @@ export default function RegionFilter() {
   const handleValueChange = (query: string) => {
     const params = new URLSearchParams(searchParams);
     if (query.length) params.set("region", query);
-    else params.delete("region");
+    else {
+      params.delete("region");
+    }
+
+    params.set("offset", "0");
+    params.set("limit", "25");
     setSearchParams(params, { replace: true });
   };
 

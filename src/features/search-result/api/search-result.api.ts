@@ -1,29 +1,17 @@
-export const fetchCountryList = async (countryName?: string, regionName?: string) => {
-  let countries;
-  if (regionName) countries = await fetchByRegion(regionName);
-  else countries = await fetchAllCountry();
+import { mergeUrl } from "../utils/search-result.utils";
 
-  const shouldFetchAll = !countryName;
-  if (shouldFetchAll) return countries;
-
-  return countries.filter((country) => {
-    const cName = country.name.official.toLowerCase();
-    const searchName = countryName.trim().toLowerCase();
-    const cNameMatch = cName.includes(searchName);
-    return cNameMatch;
+export const fetchAllCountry = async (country: string, region: string, offset: string, limit: string) => {
+  const baseUrl = "/api?response_fields=names.common,codes.ccn3,flag.url_svg,flag.url_png,flag.emoji,flag.description,region,capitals,population";
+  const countryQuery = country ? "q=" + country : "";
+  const regionQuery = region ? "region=" + region : "";
+  const offsetQuery = `offset=${Number(offset)}`;
+  const limitQuery = `limit=${Number(limit) || 10}`;
+  const response = await fetch(mergeUrl(baseUrl, countryQuery, regionQuery, offsetQuery, limitQuery), {
+    method: "GET",
+    headers: { Authorization: "Bearer " + import.meta.env.VITE_REST_COUNTRY_API_KEY },
   });
-};
 
-const fetchAllCountry = async () => {
-  const response = await fetch("/api/all?fields=name,flags,population,region,capital,cca3", { method: "GET" });
-  const data = await response.json();
-  if (!Array.isArray(data)) throw new Error(data.message);
-  return data;
-};
-
-const fetchByRegion = async (regionName: string) => {
-  const response = await fetch(`/api/region/${regionName.trim().toLowerCase()}?fields=name,flags,population,region,capital,cca2`, { method: "GET" });
-  const data = await response.json();
-  if (!Array.isArray(data)) throw new Error(data.message);
+  const { data } = await response.json();
+  if (!Array.isArray(data.objects)) throw new Error(data.message);
   return data;
 };

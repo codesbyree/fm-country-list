@@ -18,20 +18,24 @@ const itemVariants = {
 };
 
 export default function CountryCard(props: Props) {
-  const { name, flags, population, region, capital, cca3 } = props;
+  const { capitals, codes, flag, names, region, population } = props;
+
+  const capitalName = capitals.map((c) => c.name);
 
   return (
-    <Link to={`/${cca3}`}>
+    <Link to={`/${codes.ccn3}`}>
       <motion.article layout variants={itemVariants} whileHover="hover" initial="hidden" animate="show" exit="exit" className="w-70 lg:w-full rounded-lg shadow-lg overflow-hidden bg-card group">
         <AspectRatio ratio={16 / 9} className="overflow-hidden">
-          <img src={flags.svg} alt={flags.alt} className="group-hover:scale-110 transition-transform w-full h-full object-cover bg-slate-200 dark:bg-slate-600" loading="lazy" />
+          {flag.url_svg && (
+            <img src={flag.url_svg} alt={flag.description} className="group-hover:scale-110 transition-transform w-full h-full object-cover bg-slate-200 dark:bg-slate-600" loading="lazy" />
+          )}
         </AspectRatio>
 
         <div className="p-6 text-foreground border-t border-slate-200 dark:border-slate-900">
-          <h4 className="mb-6 font-bold text-lg line-clamp-1">{name.common}</h4>
+          <h4 className="mb-6 font-bold text-lg line-clamp-1">{names.common}</h4>
           <CardDetailRow className="mb-2" label="Population" value={numberFormat(population)} />
           <CardDetailRow className="mb-2" label="Region" value={region} />
-          <CardDetailRow label="Capital" value={capital.join(",")} />
+          <CardDetailRow label="Capital" value={capitalName.join(",")} />
         </div>
       </motion.article>
     </Link>
