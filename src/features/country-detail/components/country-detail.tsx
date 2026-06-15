@@ -19,5 +19,6 @@ export default function CountryDetail() {
 
   if (isActuallyLoading) return <CountryDetailSkeleton />;
   if (isError && !isActuallyLoading) return <GeneralError errorMessage="Failed to fetch country detail" />;
-  return <CountryDetailCard data={data as CountryData} />;
+
+  return <CountryDetailCard data={data.objects[0] as CountryData} />;
 }

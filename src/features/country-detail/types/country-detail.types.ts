@@ -1,46 +1,63 @@
 export interface CountryData {
-  flags: {
-    png: string;
-    svg: string;
-    alt: string;
-  };
-  name: {
+  names: {
     common: string;
-    official: string;
-    nativeName: {
-      [key: string]: {
-        official: string;
+    native: Record<
+      string,
+      {
         common: string;
-      };
+        official: string;
+      }
+    >;
+  };
+  codes: {
+    alpha_3: string;
+  };
+  capitals: Array<{
+    attributes: {
+      administrative: boolean;
+      constitutional: boolean;
+      executive: boolean;
+      judicial: boolean;
+      legislative: boolean;
+      primary: boolean;
     };
-  };
-  currencies: {
-    [key: string]: {
-      name: string;
-      symbol: string;
+    coordinates: {
+      lat: number;
+      lng: number;
     };
+    name: string;
+  }>;
+  flag: {
+    description: string;
+    emoji: string;
+    url_png: string;
+    url_svg: string;
   };
-  languages: {
-    [key: string]: string;
-  };
-  tld: string[];
-  capital: string[];
   region: string;
   subregion: string;
+  currencies: Array<{
+    code: string;
+    name: string;
+    symbol: string;
+  }>;
+  languages: Array<{
+    bcp47: string;
+    iso639_1: string;
+    iso639_2b: string;
+    iso639_2t: string;
+    iso639_3: string;
+    name: string;
+    native_name: string;
+  }>;
   population: number;
-  borders: string[];
+  tlds: string[];
 }
 
 export interface BorderResponse {
-  name: {
+  names: {
     common: string;
-    official: string;
-    nativeName: {
-      [key: string]: {
-        official: string;
-        common: string;
-      };
-    };
   };
-  cca2: string;
+  codes: {
+    alpha_3: string;
+  };
 }

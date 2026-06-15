@@ -15,33 +15,36 @@ interface Props extends ComponentPropsWithoutRef<"article"> {
 
 export default function CountryDetailCard(props: Props) {
   const { className, data, ...rest } = props;
+  const { names, flag, region, population, capitals, tlds, codes } = data;
+
+  const capitalNames = capitals.map((c) => c.name);
 
   return (
     <article className={cn("flex flex-col gap-8 lg:grid lg:grid-cols-2 lg:gap-20", className)} {...rest}>
       <AspectRatio ratio={16 / 9} className="border border-slate-200 dark:border-background">
-        <img src={data.flags.svg} alt={data.flags.alt} className="w-full h-full lg:h-auto object-cover" />
+        <img src={flag.url_svg} alt={flag.description} className="w-full h-full lg:h-auto object-cover" />
       </AspectRatio>
 
       <div className="flex flex-col gap-8 lg:gap-12">
-        <h1 className="font-bold text-xl text-foreground lg:text-2xl">{data.name.common}</h1>
+        <h1 className="font-bold text-xl text-foreground lg:text-2xl">{names.common}</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20">
           <div className="flex flex-col gap-4">
             <CardDetailRow label="Native Name" value={getNativeName(data)} />
-            <CardDetailRow label="Population" value={numberFormat(data.population)} />
-            <CardDetailRow label="Region" value={data.region} />
+            <CardDetailRow label="Population" value={numberFormat(population)} />
+            <CardDetailRow label="Region" value={region} />
             <CardDetailRow label="Sub Region" value={data.subregion} />
-            <CardDetailRow label="Capital" value={data.capital.join(", ")} />
+            <CardDetailRow label="Capital" value={capitalNames.join(", ")} />
           </div>
 
           <div className="flex flex-col gap-4">
-            <CardDetailRow label="Tol Level Domain" value={data.tld.join(", ")} />
+            <CardDetailRow label="Tol Level Domain" value={tlds.join(", ")} />
             <CardDetailRow label="Currencies" value={getCurrencies(data).join(", ")} />
             <CardDetailRow label="Languages" value={getLanguages(data).join(", ")} />
           </div>
         </div>
 
-        <CountryBorders borders={data.borders} />
+        <CountryBorders alpha_3={codes.alpha_3} />
       </div>
     </article>
   );

@@ -3,7 +3,7 @@ export interface BaseResponse {
     common: string;
   };
   codes: {
-    ccn3: string;
+    alpha_3: string;
   };
   capitals: {
     attributes: {

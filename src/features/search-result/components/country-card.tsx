@@ -23,7 +23,7 @@ export default function CountryCard(props: Props) {
   const capitalName = capitals.map((c) => c.name);
 
   return (
-    <Link to={`/${codes.ccn3}`}>
+    <Link to={`/${codes.alpha_3}`}>
       <motion.article layout variants={itemVariants} whileHover="hover" initial="hidden" animate="show" exit="exit" className="w-70 lg:w-full rounded-lg shadow-lg overflow-hidden bg-card group">
         <AspectRatio ratio={16 / 9} className="overflow-hidden">
           {flag.url_svg && (

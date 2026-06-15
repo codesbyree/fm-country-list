@@ -5,19 +5,30 @@ export const parseCountryCCACode = (code?: string) => {
 };
 
 export const getNativeName = (country: CountryData) => {
-  const nativeNameObj = country.name.nativeName;
-  if (!nativeNameObj) return country.name.common;
-  const values = Object.values(nativeNameObj);
+  try {
+    const nativeNameObj = country.names.native;
+    if (!nativeNameObj) return country.names.common;
+    const values = Object.values(nativeNameObj);
 
-  return values[0].common || country.name.common;
+    return values[0].common || country.names.common;
+  } catch {
+    return "-";
+  }
 };
 
 export const getCurrencies = (country: CountryData) => {
-  const currencyObj = country.currencies;
-  return Object.entries(currencyObj).map(([, val]) => val.name);
+  try {
+    const currencyObj = country.currencies;
+    return Object.entries(currencyObj).map(([, val]) => val.name);
+  } catch {
+    return [];
+  }
 };
 
 export const getLanguages = (country: CountryData) => {
-  const langObj = country.languages;
-  return Object.entries(langObj).map(([, val]) => val);
+  try {
+    return country.languages.map((l) => l.native_name);
+  } catch {
+    return [];
+  }
 };
